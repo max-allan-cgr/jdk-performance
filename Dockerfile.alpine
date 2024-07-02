@@ -1,0 +1,17 @@
+# alpine version not available on arm64
+# FROM eclipse-temurin:8u412-b08-jdk-alpine
+FROM eclipse-temurin:8u412-b08-jdk-jammy
+
+USER root
+# RUN apk add maven
+RUN apt update && apt -y install maven git
+# USER java
+RUN mkdir /home/build
+WORKDIR /home/build
+RUN git clone https://github.com/openjdk/jmh
+COPY JMHSample_40_max.java /home/build/jmh/jmh-samples/src/main/java/org/openjdk/jmh/samples/
+RUN cd jmh && mvn clean verify || true
+ENTRYPOINT bash
+
+# cd jmh-samples
+# java -jar target/benchmarks.jar JMHSample_40
