@@ -24,15 +24,15 @@ newgrp docker # (or logout/login)
 
 Then:
 ```
-docker build -t public -f Dockerfile.alpine
+docker build -t public -f Dockerfile.alpine .
 
-docker build -t chain -f Dockerfile
+docker build -t chain -f Dockerfile.cgr .
 ```
 
 When a build is done, run it and run the benchmark like this:
 ```
 docker run -it <image> 
-cd jmh-samples
+cd jhm/jmh-samples
 java -jar target/benchmarks.jar JMHSample_40
 ```
 
